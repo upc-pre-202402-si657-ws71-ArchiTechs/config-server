@@ -7,7 +7,7 @@ spring:
 
 eureka:
   instance:
-    hostname: localhost
+    hostname: microservicioeureka-cagxfnd9gabvf5db.canadacentral-01.azurewebsites.net
   client:
     register-with-eureka: false
     fetch-registry: false
