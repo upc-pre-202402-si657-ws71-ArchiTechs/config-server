@@ -1,5 +1,5 @@
 server:
-  port: 8761  
+  port: 8761
 
 spring:
   application:
@@ -7,9 +7,10 @@ spring:
 
 eureka:
   instance:
-    hostname: eurekamsvc.azurewebsites.net
+    hostname: eurekamsvc.azurewebsites.net  # Dominio público de Azure
+    prefer-ip-address: false  # Usar el nombre de host en lugar de la IP
   client:
     register-with-eureka: false
     fetch-registry: false
-    serverUrl:
-      defaultZone: https://${eureka.instance.hostname}/eureka/
+    service-url:
+      defaultZone: https://eurekamsvc.azurewebsites.net/eureka/
