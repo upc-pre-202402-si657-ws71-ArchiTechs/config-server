@@ -1,16 +1,38 @@
 server:
-  port: 8761
+  port: 8761 # Puerto en el que corre Eureka
 
 spring:
   application:
-    name: msvc-eureka
+    name: msvc-eureka # Nombre del microservicio Eureka
 
 eureka:
   instance:
     hostname: eurekamsvc.azurewebsites.net  # Dominio público de Azure
     prefer-ip-address: false  # Usar el nombre de host en lugar de la IP
+    # Puedes agregar esta propiedad para que se registre a sí mismo con Eureka
+    # (si estás ejecutando Eureka en el mismo servicio o en un entorno controlado)
+    # instance-id: ${spring.application.name}:${server.port}
+  
   client:
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: true  # Permite que Eureka se registre como un microservicio
+    fetch-registry: false  # No necesita obtener el registro de otros servidores en un entorno no replicado
     service-url:
-      defaultZone: https://eurekamsvc.azurewebsites.net/eureka/
+      defaultZone: https://eurekamsvc.azurewebsites.net/eureka/  # URL para la zona del servidor Eureka
+
+  # Desactivar auto-preservación en entornos de desarrollo o pruebas para manejar mejor los errores
+  server:
+    enable-self-preservation: false # Desactiva la preservación automática de instancias fallidas
+    eviction-interval-timer-in-ms: 60000 # Tiempo de espera en ms para verificar las instancias expiradas
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # Exponer todos los endpoints de administración para monitoreo
+  endpoint:
+    health:
+      show-details: always  # Mostrar detalles completos en el endpoint /actuator/health
+
+logging:
+  level:
+    com.netflix.eureka: DEBUG  # Aumentar el nivel de log para depuración de Eureka
