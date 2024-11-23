@@ -1,5 +1,5 @@
 server:
-  port: 8761
+  port: 8761  
 
 spring:
   application:
@@ -7,9 +7,9 @@ spring:
 
 eureka:
   instance:
-    hostname: microservicioeureka-cagxfnd9gabvf5db.canadacentral-01.azurewebsites.net
+    hostname: eurekamsvc.azurewebsites.net
   client:
     register-with-eureka: false
     fetch-registry: false
     serverUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: https://${eureka.instance.hostname}/eureka/
